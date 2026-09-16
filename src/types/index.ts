@@ -20,6 +20,9 @@ export interface Subject {
   description: string
   icon: string
   categories: ResourceCategory[]
+  // Public Google Drive folder ("Anyone with the link → Viewer").
+  // When set, the subject card opens this folder instead of the subject page.
+  driveFolderUrl?: string
 }
 
 export interface Resource {

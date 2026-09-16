@@ -4,68 +4,41 @@ import type { Resource } from '../types'
 // Drive "Anyone with the link → Viewer" share link (or any public link).
 //
 // {
-//   title: "Tutorial 4",
+//   title: "Unit 3 Notes",
 //   subjectId: "mathematics",
-//   categoryId: "tutorial-1",
+//   categoryId: "notes", // notes | pyq | important (+ tutorials for MFC)
 //   date: "2026-09-16",
 //   url: "GOOGLE_DRIVE_LINK",
 //   type: "pdf",
 // }
 export const resources: Resource[] = [
-  // Mathematics
+  // MFC (subjectId stays 'mathematics')
   {
-    id: 'math-notes-1',
-    title: 'Mathematics Unit 1 Notes',
+    id: 'mfc-unit-1-notes',
+    title: 'MFC Unit 1 Notes',
     subjectId: 'mathematics',
     categoryId: 'notes',
-    date: '2026-09-10',
-    url: 'https://drive.google.com/drive/folders/1MathNotesUnit1',
-    type: 'drive',
+    date: '2026-09-16',
+    url: '/pdfs/mfc/unit-1-notes.pdf',
+    type: 'pdf',
+  },
+  {
+    id: 'mfc-unit-1-notes-2',
+    title: 'MFC Unit 1 Notes (Set 2)',
+    subjectId: 'mathematics',
+    categoryId: 'notes',
+    date: '2026-09-16',
+    url: '/pdfs/mfc/unit-1-notes-2.pdf',
+    type: 'pdf',
   },
   {
     id: 'math-notes-2',
-    title: 'Mathematics Unit 2 Notes',
+    title: 'MFC Unit 2 Notes',
     subjectId: 'mathematics',
     categoryId: 'notes',
     date: '2026-09-14',
     url: 'https://drive.google.com/drive/folders/1MathNotesUnit2',
     type: 'drive',
-  },
-  {
-    id: 'math-tut-1',
-    title: 'Tutorial 1 PDF',
-    subjectId: 'mathematics',
-    categoryId: 'tutorial-1',
-    date: '2026-09-16',
-    url: 'https://drive.google.com/file/d/1MathTutorial1/view',
-    type: 'pdf',
-  },
-  {
-    id: 'math-tut-1-sol',
-    title: 'Tutorial 1 Solutions',
-    subjectId: 'mathematics',
-    categoryId: 'tutorial-1',
-    date: '2026-09-16',
-    url: 'https://drive.google.com/file/d/1MathTutorial1Solutions/view',
-    type: 'pdf',
-  },
-  {
-    id: 'math-tut-2',
-    title: 'Tutorial 2 PDF',
-    subjectId: 'mathematics',
-    categoryId: 'tutorial-2',
-    date: '2026-09-15',
-    url: 'https://drive.google.com/file/d/1MathTutorial2/view',
-    type: 'pdf',
-  },
-  {
-    id: 'math-tut-3',
-    title: 'Tutorial 3 PDF',
-    subjectId: 'mathematics',
-    categoryId: 'tutorial-3',
-    date: '2026-09-12',
-    url: 'https://drive.google.com/file/d/1MathTutorial3/view',
-    type: 'pdf',
   },
   {
     id: 'math-pyq-2025',
@@ -97,24 +70,6 @@ export const resources: Resource[] = [
     url: 'https://drive.google.com/drive/folders/1EnglishNotes',
     type: 'drive',
   },
-  {
-    id: 'eng-tut-1',
-    title: 'Tutorial 1 — Comprehension',
-    subjectId: 'english',
-    categoryId: 'tutorial-1',
-    date: '2026-09-13',
-    url: 'https://drive.google.com/file/d/1EnglishTutorial1/view',
-    type: 'pdf',
-  },
-  {
-    id: 'eng-video-1',
-    title: 'Effective Communication — Video Lecture',
-    subjectId: 'english',
-    categoryId: 'other',
-    date: '2026-09-07',
-    url: 'https://youtube.com/watch?v=example-english-comm',
-    type: 'video',
-  },
 
   // EEE
   {
@@ -125,15 +80,6 @@ export const resources: Resource[] = [
     date: '2026-09-15',
     url: 'https://drive.google.com/drive/folders/1EEENotesUnit2',
     type: 'drive',
-  },
-  {
-    id: 'eee-tut-1',
-    title: 'Tutorial 1 PDF',
-    subjectId: 'eee',
-    categoryId: 'tutorial-1',
-    date: '2026-09-05',
-    url: 'https://drive.google.com/file/d/1EEETutorial1/view',
-    type: 'pdf',
   },
   {
     id: 'eee-pyq-2025',
@@ -147,22 +93,13 @@ export const resources: Resource[] = [
 
   // MCD
   {
-    id: 'mcd-notes-1',
-    title: 'MCD Fundamentals Notes',
+    id: 'mcd-unit-2-engineering-materials',
+    title: 'Unit 2 Engineering Materials',
     subjectId: 'mcd',
     categoryId: 'notes',
-    date: '2026-09-06',
-    url: 'https://drive.google.com/drive/folders/1MCDNotes',
-    type: 'drive',
-  },
-  {
-    id: 'mcd-assignment-1',
-    title: 'Assignment 1 — Sheets',
-    subjectId: 'mcd',
-    categoryId: 'assignments',
-    date: '2026-09-04',
-    url: 'https://docs.google.com/spreadsheets/d/1MCDAssignment1',
-    type: 'sheet',
+    date: '2026-09-16',
+    url: '/pdfs/mcd/unit-2-engineering-materials.pdf',
+    type: 'pdf',
   },
 
   // CT
@@ -175,15 +112,6 @@ export const resources: Resource[] = [
     url: 'https://drive.google.com/drive/folders/1CTENotes',
     type: 'drive',
   },
-  {
-    id: 'cte-tut-1',
-    title: 'Tutorial 1 PDF',
-    subjectId: 'cte',
-    categoryId: 'tutorial-1',
-    date: '2026-09-01',
-    url: 'https://drive.google.com/file/d/1CTETutorial1/view',
-    type: 'pdf',
-  },
 
   // PL
   {
@@ -194,24 +122,6 @@ export const resources: Resource[] = [
     date: '2026-09-16',
     url: 'https://drive.google.com/drive/folders/1PLNotes',
     type: 'drive',
-  },
-  {
-    id: 'pl-tut-1',
-    title: 'Tutorial 1 — Practice Problems',
-    subjectId: 'pl',
-    categoryId: 'tutorial-1',
-    date: '2026-09-13',
-    url: 'https://drive.google.com/file/d/1PLTutorial1/view',
-    type: 'pdf',
-  },
-  {
-    id: 'pl-website-1',
-    title: 'Practice Platform',
-    subjectId: 'pl',
-    categoryId: 'other',
-    date: '2026-08-28',
-    url: 'https://example.com/practice',
-    type: 'website',
   },
 ]
 

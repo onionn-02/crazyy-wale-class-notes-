@@ -1,4 +1,5 @@
 import { Navigate, useParams } from 'react-router-dom'
+import { ExternalLink } from 'lucide-react'
 import Breadcrumbs from '../components/Breadcrumbs'
 import CategoryCard from '../components/CategoryCard'
 import { getSubjectById } from '../data/subjects'
@@ -28,6 +29,18 @@ export default function SubjectPage() {
           <p className="mt-1 text-slate-500 dark:text-slate-400">{subject.description}</p>
         </div>
       </div>
+
+      {subject.driveFolderUrl && (
+        <a
+          href={subject.driveFolderUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="mt-6 inline-flex min-h-11 items-center gap-2 rounded-xl bg-brand-600 px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-brand-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-500"
+        >
+          Open Google Drive folder
+          <ExternalLink className="h-4 w-4" aria-hidden="true" />
+        </a>
+      )}
 
       <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
         {subject.categories.map((category) => (

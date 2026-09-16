@@ -19,8 +19,12 @@ export default function ResourceCard({ resource, subjectName, categoryName }: Re
       return
     }
     try {
-      const opened = window.open(resource.url, '_blank', 'noopener,noreferrer')
-      if (!opened) {
+      // 'noopener' makes window.open return null even on success, so detach
+      // the opener manually instead to still detect blocked popups.
+      const opened = window.open(resource.url, '_blank')
+      if (opened) {
+        opened.opener = null
+      } else {
         setIsUnavailable(true)
       }
     } catch {

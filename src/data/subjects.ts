@@ -3,26 +3,29 @@ import type { ResourceCategory, Subject } from '../types'
 // Shared category set used by every subject. Add/remove a category here and
 // it will apply everywhere — no component changes needed.
 const defaultCategories: ResourceCategory[] = [
-  { id: 'notes', name: 'Notes', description: 'Lecture notes & PDFs', icon: 'notes' },
-  { id: 'tutorial-1', name: 'Tutorial 1', description: 'Tutorial questions', icon: 'tutorial' },
-  { id: 'tutorial-2', name: 'Tutorial 2', description: 'Tutorial questions', icon: 'tutorial' },
-  { id: 'tutorial-3', name: 'Tutorial 3', description: 'Tutorial questions', icon: 'tutorial' },
+  { id: 'notes', name: 'Notes', description: 'All unit notes', icon: 'notes' },
   { id: 'pyq', name: 'Previous Year Questions', description: 'Past exam papers', icon: 'pyq' },
   { id: 'important', name: 'Important Questions', description: 'High-priority questions', icon: 'star' },
-  { id: 'assignments', name: 'Assignments', description: 'Homework & submissions', icon: 'assignment' },
-  { id: 'other', name: 'Other Resources', description: 'Extra material & links', icon: 'other' },
 ]
 
 // To add a new subject, add an entry here. To change a subject's
 // categories, override the `categories` field for that subject.
+//
+// driveFolderUrl: paste the subject's Google Drive folder link here
+// (shared as "Anyone with the link → Viewer"). When filled in, the subject
+// card opens that folder. Leave it empty to use the built-in subject page.
 export const subjects: Subject[] = [
   {
     id: 'mathematics',
-    name: 'Mathematics',
-    shortName: 'Maths',
+    name: 'MFC',
+    shortName: 'MFC',
     description: 'Calculus, linear algebra, probability & more.',
     icon: 'sigma',
-    categories: defaultCategories,
+    driveFolderUrl: 'https://drive.google.com/drive/folders/1PT8F7g-z9sH_WFtJIBWmpeDHSLcAxLkO',
+    categories: [
+      ...defaultCategories,
+      { id: 'tutorials', name: 'Tutorials', description: 'Tutorial questions & solutions', icon: 'tutorial' },
+    ],
   },
   {
     id: 'english',
@@ -30,6 +33,7 @@ export const subjects: Subject[] = [
     shortName: 'English',
     description: 'Communication skills & technical writing.',
     icon: 'book',
+    driveFolderUrl: '',
     categories: defaultCategories,
   },
   {
@@ -38,6 +42,7 @@ export const subjects: Subject[] = [
     shortName: 'EEE',
     description: 'Basic Electrical & Electronics Engineering.',
     icon: 'zap',
+    driveFolderUrl: 'https://drive.google.com/drive/folders/1BrPepIfkJ_qT3DiVmwhcIqIxMU9Mtniu',
     categories: defaultCategories,
   },
   {
@@ -46,6 +51,7 @@ export const subjects: Subject[] = [
     shortName: 'MCD',
     description: 'Mechanics & Computer-aided Design.',
     icon: 'ruler',
+    driveFolderUrl: 'https://drive.google.com/drive/folders/1YuyAu8AR0HabHrhrdL5JrJ2jAF5KwOne',
     categories: defaultCategories,
   },
   {
@@ -54,6 +60,7 @@ export const subjects: Subject[] = [
     shortName: 'CT',
     description: 'Computational Thinking & Computing fundamentals.',
     icon: 'cpu',
+    driveFolderUrl: 'https://drive.google.com/drive/folders/1Ahv93hu3P-i9A3zdiAWfUUR3tufY72od',
     categories: defaultCategories,
   },
   {
@@ -62,6 +69,7 @@ export const subjects: Subject[] = [
     shortName: 'PL',
     description: 'Programming Languages & problem solving.',
     icon: 'code',
+    driveFolderUrl: 'https://drive.google.com/drive/folders/1YRzhvS7LZ3ddcnQd2gptURKf1__zQMtk',
     categories: defaultCategories,
   },
 ]

@@ -19,7 +19,7 @@ export default function SearchBar({ value, onChange, placeholder, autoFocus }: S
         value={value}
         autoFocus={autoFocus}
         onChange={(event) => onChange(event.target.value)}
-        placeholder={placeholder ?? 'Search notes, tutorials...'}
+        placeholder={placeholder ?? 'Search subjects, notes, PYQs...'}
         aria-label="Search resources"
         className="w-full rounded-2xl border border-slate-200 bg-white py-3.5 pl-12 pr-4 text-base text-slate-900 shadow-sm placeholder:text-slate-400 focus:border-brand-400 focus:outline-none focus:ring-4 focus:ring-brand-100 dark:border-slate-800 dark:bg-slate-900 dark:text-slate-50 dark:placeholder:text-slate-500 dark:focus:border-brand-500 dark:focus:ring-brand-500/20"
       />

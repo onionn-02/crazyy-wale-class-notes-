@@ -32,7 +32,7 @@ export default function Home() {
           Everything you need for your studies.
         </h1>
         <p className="mx-auto mt-4 max-w-xl text-base text-slate-500 dark:text-slate-400 sm:text-lg">
-          Notes, tutorials, previous year questions and important resources — all in one place, no
+          Notes, previous year questions and important resources — all in one place, no
           more digging through chat groups.
         </p>
 
