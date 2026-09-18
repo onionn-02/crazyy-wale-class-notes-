@@ -9,9 +9,9 @@ interface SearchBarProps {
 
 export default function SearchBar({ value, onChange, placeholder, autoFocus }: SearchBarProps) {
   return (
-    <div className="relative">
+    <div className="group relative rounded-lg border border-edge bg-surface/70 backdrop-blur-sm transition-all duration-300 focus-within:border-brand-400/70 focus-within:shadow-[0_0_0_4px_rgb(99_102_241_/_0.12)]">
       <Search
-        className="pointer-events-none absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 text-slate-400 dark:text-slate-500"
+        className="pointer-events-none absolute left-5 top-1/2 h-5 w-5 -translate-y-1/2 text-ink-faint transition-colors group-focus-within:text-brand-400"
         aria-hidden="true"
       />
       <input
@@ -21,7 +21,7 @@ export default function SearchBar({ value, onChange, placeholder, autoFocus }: S
         onChange={(event) => onChange(event.target.value)}
         placeholder={placeholder ?? 'Search subjects, notes, PYQs...'}
         aria-label="Search resources"
-        className="w-full rounded-2xl border border-slate-200 bg-white py-3.5 pl-12 pr-4 text-base text-slate-900 shadow-sm placeholder:text-slate-400 focus:border-brand-400 focus:outline-none focus:ring-4 focus:ring-brand-100 dark:border-slate-800 dark:bg-slate-900 dark:text-slate-50 dark:placeholder:text-slate-500 dark:focus:border-brand-500 dark:focus:ring-brand-500/20"
+        className="w-full bg-transparent py-4 pl-14 pr-5 text-base text-ink placeholder:text-ink-faint focus:outline-none sm:py-5 sm:text-lg"
       />
     </div>
   )

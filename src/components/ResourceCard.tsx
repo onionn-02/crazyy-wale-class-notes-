@@ -1,17 +1,18 @@
 import { useState } from 'react'
-import { AlertTriangle, ExternalLink } from 'lucide-react'
+import { AlertTriangle, ArrowUpRight } from 'lucide-react'
 import type { Resource } from '../types'
-import { ResourceTypeIcon } from './icons'
 import { formatDate } from '../utils/formatDate'
 
 interface ResourceCardProps {
   resource: Resource
   subjectName: string
   categoryName: string
+  index: number
 }
 
-export default function ResourceCard({ resource, subjectName, categoryName }: ResourceCardProps) {
+export default function ResourceCard({ resource, subjectName, categoryName, index }: ResourceCardProps) {
   const [isUnavailable, setIsUnavailable] = useState(false)
+  const number = String(index + 1).padStart(2, '0')
 
   function handleOpen() {
     if (!resource.url) {
@@ -33,19 +34,18 @@ export default function ResourceCard({ resource, subjectName, categoryName }: Re
   }
 
   return (
-    <div className="flex flex-col gap-4 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition-shadow hover:shadow-md dark:border-slate-800 dark:bg-slate-900 sm:flex-row sm:items-center sm:justify-between">
-      <div className="flex items-start gap-3">
-        <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-brand-50 text-brand-600 dark:bg-brand-500/10 dark:text-brand-400">
-          <ResourceTypeIcon type={resource.type} className="h-5 w-5" />
-        </span>
-        <div>
-          <h3 className="font-semibold text-slate-900 dark:text-slate-50">{resource.title}</h3>
-          <p className="mt-0.5 text-sm text-slate-500 dark:text-slate-400">
-            {subjectName} • {categoryName}
+    <div className="flex flex-col gap-4 py-6 sm:flex-row sm:items-center sm:justify-between sm:gap-6 sm:py-7">
+      <div className="flex min-w-0 items-baseline gap-4 sm:gap-6">
+        <span className="font-display text-sm tabular-nums text-ink-faint">{number}</span>
+        <div className="min-w-0">
+          <h3 className="truncate font-display text-lg font-semibold tracking-tight text-ink sm:text-xl">
+            {resource.title}
+          </h3>
+          <p className="mt-1.5 text-sm text-ink-muted">
+            {subjectName} · {categoryName} · {formatDate(resource.date)}
           </p>
-          <p className="mt-0.5 text-xs text-slate-400 dark:text-slate-500">Added: {formatDate(resource.date)}</p>
           {isUnavailable && (
-            <p className="mt-2 flex items-center gap-1.5 text-sm font-medium text-amber-600 dark:text-amber-400">
+            <p className="mt-2 flex items-center gap-1.5 text-sm font-medium text-amber-500">
               <AlertTriangle className="h-4 w-4" aria-hidden="true" />
               Sorry, this resource is currently unavailable.
             </p>
@@ -56,10 +56,10 @@ export default function ResourceCard({ resource, subjectName, categoryName }: Re
       <button
         type="button"
         onClick={handleOpen}
-        className="inline-flex shrink-0 items-center justify-center gap-2 rounded-xl bg-brand-600 px-4 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-brand-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-500"
+        className="ml-10 inline-flex shrink-0 items-center gap-2 self-start rounded-md border border-edge px-4 py-2.5 text-xs font-semibold uppercase tracking-widest text-ink transition-colors hover:border-brand-400/60 hover:text-brand-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-500 sm:ml-0"
       >
-        Open Resource
-        <ExternalLink className="h-4 w-4" aria-hidden="true" />
+        Open
+        <ArrowUpRight className="h-3.5 w-3.5" aria-hidden="true" />
       </button>
     </div>
   )

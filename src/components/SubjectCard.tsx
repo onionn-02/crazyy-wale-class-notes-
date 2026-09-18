@@ -1,54 +1,60 @@
 import type { ReactNode } from 'react'
 import { Link } from 'react-router-dom'
-import { ArrowRight, ExternalLink } from 'lucide-react'
+import { ArrowRight, ArrowUpRight } from 'lucide-react'
 import type { Subject } from '../types'
-import { SubjectIcon } from './icons'
 
-const cardClass =
-  'group flex flex-col rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition-all hover:-translate-y-0.5 hover:border-brand-200 hover:shadow-md focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-500 dark:border-slate-800 dark:bg-slate-900 dark:hover:border-brand-800'
+// One row in the numbered subject index used on Home, /subjects and search
+// results. The parent renders these inside a `divide-y divide-edge
+// border-y border-edge` wrapper — the row itself only owns its vertical
+// padding and hover state, so the dividing lines line up automatically.
+const rowClass =
+  'group flex flex-col gap-2 py-6 transition-colors hover:bg-ink/[0.025] focus-visible:outline focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-brand-500 sm:py-7'
 
-export default function SubjectCard({ subject }: { subject: Subject }) {
-  const content = (action: ReactNode) => (
+export default function SubjectCard({ subject, index }: { subject: Subject; index: number }) {
+  const number = String(index + 1).padStart(2, '0')
+  const isDrive = Boolean(subject.driveFolderUrl)
+
+  const body = (
     <>
-      <span className="mb-4 flex h-11 w-11 items-center justify-center rounded-xl bg-brand-50 text-brand-600 transition-colors group-hover:bg-brand-100 dark:bg-brand-500/10 dark:text-brand-400 dark:group-hover:bg-brand-500/20">
-        <SubjectIcon icon={subject.icon} className="h-6 w-6" />
-      </span>
-      <h3 className="text-base font-semibold text-slate-900 dark:text-slate-50">{subject.name}</h3>
-      <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">{subject.description}</p>
-      <span className="mt-4 inline-flex items-center gap-1 text-sm font-medium text-brand-600 dark:text-brand-400">
-        {action}
-      </span>
+      <div className="flex items-center justify-between gap-4">
+        <div className="flex items-baseline gap-4 sm:gap-6">
+          <span className="font-display text-sm tabular-nums text-ink-faint transition-colors group-hover:text-brand-400">
+            {number}
+          </span>
+          <h3 className="font-display text-xl font-semibold tracking-tight text-ink sm:text-2xl">{subject.name}</h3>
+        </div>
+        <span className="flex shrink-0 items-center gap-1.5 text-xs font-semibold uppercase tracking-widest text-ink-muted transition-colors group-hover:text-ink">
+          <span className="hidden sm:inline">{isDrive ? 'Open in Drive' : 'Explore'}</span>
+          {isDrive ? (
+            <ArrowUpRight
+              className="h-3.5 w-3.5 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
+              aria-hidden="true"
+            />
+          ) : (
+            <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" aria-hidden="true" />
+          )}
+        </span>
+      </div>
+      <p className="max-w-md pl-10 text-sm text-ink-muted sm:pl-14">{subject.description}</p>
     </>
   )
 
-  // Subject has a shared Drive folder: open it directly in a new tab.
-  if (subject.driveFolderUrl) {
-    return (
+  const wrap = (children: ReactNode) =>
+    isDrive ? (
       <a
         href={subject.driveFolderUrl}
         target="_blank"
         rel="noopener noreferrer"
         aria-label={`${subject.name} — open Google Drive folder (opens in a new tab)`}
-        className={cardClass}
+        className={rowClass}
       >
-        {content(
-          <>
-            Open in Drive
-            <ExternalLink className="h-4 w-4" aria-hidden="true" />
-          </>,
-        )}
+        {children}
       </a>
+    ) : (
+      <Link to={`/subject/${subject.id}`} className={rowClass}>
+        {children}
+      </Link>
     )
-  }
 
-  return (
-    <Link to={`/subject/${subject.id}`} className={cardClass}>
-      {content(
-        <>
-          View resources
-          <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" aria-hidden="true" />
-        </>,
-      )}
-    </Link>
-  )
+  return wrap(body)
 }

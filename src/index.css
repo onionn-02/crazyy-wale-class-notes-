@@ -1,17 +1,141 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* ---------------------------------------------------------------------- */
+/* Theme tokens                                                            */
+/*                                                                          */
+/* Every color in the app reads from these variables (via the `canvas`,    */
+/* `surface`, `ink`, `edge` tokens in tailwind.config.js) instead of       */
+/* scattering slate-500 / dark:slate-400 pairs across components. Light   */
+/* is a clean "paper" editorial theme; dark is the cinematic near-black   */
+/* flagship.                                                               */
+/* ---------------------------------------------------------------------- */
+/* RGB triplets (not full color strings) so Tailwind can inject its own
+   alpha via `bg-ink/[0.03]`-style opacity modifiers, e.g.
+   colors.ink = 'rgb(var(--ink) / <alpha-value>)' in tailwind.config.js. */
+:root {
+  --canvas: 246 245 242;
+  --surface: 255 255 255;
+  --ink: 11 11 14;
+  --ink-muted: 92 92 102;
+  --ink-faint: 147 147 156;
+  --edge: rgb(10 10 14 / 10%);
+  --edge-strong: rgb(10 10 14 / 22%);
+  --grain-opacity: 0.03;
+}
+
+:root.dark {
+  --canvas: 8 8 12;
+  --surface: 14 14 21;
+  --ink: 244 243 240;
+  --ink-muted: 141 141 153;
+  --ink-faint: 86 86 95;
+  --edge: rgb(255 255 255 / 9%);
+  --edge-strong: rgb(255 255 255 / 20%);
+  --grain-opacity: 0.05;
+}
 
 html {
   scroll-behavior: smooth;
 }
 
 body {
-  @apply bg-slate-50 text-slate-900 antialiased dark:bg-slate-950 dark:text-slate-50;
+  @apply bg-canvas text-ink antialiased;
+  font-feature-settings: 'ss01' 1;
 }
 
-* {
-  @apply border-slate-200 dark:border-slate-800;
+::selection {
+  background-color: rgb(99 102 241 / 0.35);
+  color: inherit;
+}
+
+/* A sane fallback focus ring for any interactive element that doesn't set
+   its own focus-visible classes. Most components define explicit ones. */
+:focus-visible {
+  outline: 2px solid theme('colors.brand.500');
+  outline-offset: 2px;
+}
+
+/* ---------------------------------------------------------------------- */
+/* Background effect (see components/BackgroundEffect.tsx)                */
+/* ---------------------------------------------------------------------- */
+
+/* Fine SVG-noise grain, tiled and nearly invisible — adds texture without
+   an image request or a canvas/WebGL dependency. */
+.grain-layer {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'%3E%3C/feTurbulence%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'%3E%3C/rect%3E%3C/svg%3E");
+  opacity: var(--grain-opacity);
+}
+
+/* The animated blur blobs are a dark-mode-only atmosphere — on the light
+   "paper" theme a bright blurred blob would just muddy a white background,
+   so it fades out entirely there instead of being restyled. */
+.blob-layer {
+  opacity: 0;
+  transition: opacity 0.6s ease;
+}
+
+.dark .blob-layer {
+  opacity: 1;
+}
+
+@keyframes drift-a {
+  0%, 100% { transform: translate(-6%, -4%) scale(1); }
+  50% { transform: translate(4%, 6%) scale(1.12); }
+}
+
+@keyframes drift-b {
+  0%, 100% { transform: translate(5%, 3%) scale(1.05); }
+  50% { transform: translate(-5%, -5%) scale(0.95); }
+}
+
+@keyframes drift-c {
+  0%, 100% { transform: translate(0%, 6%) scale(1); }
+  50% { transform: translate(-4%, -6%) scale(1.08); }
+}
+
+.animate-drift-a {
+  animation: drift-a 32s ease-in-out infinite;
+}
+
+.animate-drift-b {
+  animation: drift-b 38s ease-in-out infinite;
+}
+
+.animate-drift-c {
+  animation: drift-c 44s ease-in-out infinite;
+}
+
+/* ---------------------------------------------------------------------- */
+/* Motion                                                                   */
+/* ---------------------------------------------------------------------- */
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-up {
+  animation: fade-up 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+/* Single source of truth for "respect prefers-reduced-motion": disables
+   every animation/transition/smooth-scroll in the app at once, instead of
+   requiring each component to remember to guard its own motion. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
 }

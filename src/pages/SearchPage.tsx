@@ -3,6 +3,7 @@ import { useSearchParams } from 'react-router-dom'
 import SearchBar from '../components/SearchBar'
 import ResourceCard from '../components/ResourceCard'
 import SubjectCard from '../components/SubjectCard'
+import SectionLabel from '../components/SectionLabel'
 import EmptyState from '../components/EmptyState'
 import { searchResources, searchSubjects } from '../utils/search'
 
@@ -25,35 +26,47 @@ export default function SearchPage() {
   const hasResults = results.length > 0 || subjectResults.length > 0
 
   return (
-    <div className="mx-auto max-w-4xl px-4 py-10 sm:px-6 sm:py-14">
-      <h1 className="text-2xl font-extrabold tracking-tight text-slate-900 dark:text-slate-50 sm:text-3xl">Search</h1>
-      <p className="mt-1 text-slate-500 dark:text-slate-400">Find subjects, notes, PYQs and more.</p>
+    <div className="mx-auto max-w-4xl px-4 py-16 sm:px-6 sm:py-24 lg:px-8">
+      <SectionLabel>Division Study Hub</SectionLabel>
+      <h1 className="mt-4 font-display text-4xl font-semibold tracking-tight text-ink sm:text-5xl">Search</h1>
+      <p className="mt-4 max-w-md text-ink-muted">Find subjects, notes, PYQs and more.</p>
 
-      <div className="mt-6">
+      <div className="mt-10">
         <SearchBar value={query} onChange={handleChange} autoFocus />
       </div>
 
-      <div className="mt-8 flex flex-col gap-4">
+      <div className="mt-14">
         {query.trim() === '' ? (
           <EmptyState title="Start typing to search." subtitle="Try a subject name like “MFC”, or “Notes”." />
         ) : hasResults ? (
-          <>
+          <div className="flex flex-col gap-14">
             {subjectResults.length > 0 && (
-              <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-                {subjectResults.map((subject) => (
-                  <SubjectCard key={subject.id} subject={subject} />
-                ))}
-              </div>
+              <section>
+                <SectionLabel>Subjects</SectionLabel>
+                <div className="mt-5 divide-y divide-edge border-y border-edge">
+                  {subjectResults.map((subject, index) => (
+                    <SubjectCard key={subject.id} subject={subject} index={index} />
+                  ))}
+                </div>
+              </section>
             )}
-            {results.map(({ resource, subjectName, categoryName }) => (
-              <ResourceCard
-                key={resource.id}
-                resource={resource}
-                subjectName={subjectName}
-                categoryName={categoryName}
-              />
-            ))}
-          </>
+            {results.length > 0 && (
+              <section>
+                <SectionLabel>Resources</SectionLabel>
+                <div className="mt-5 divide-y divide-edge border-y border-edge">
+                  {results.map(({ resource, subjectName, categoryName }, index) => (
+                    <ResourceCard
+                      key={resource.id}
+                      resource={resource}
+                      subjectName={subjectName}
+                      categoryName={categoryName}
+                      index={index}
+                    />
+                  ))}
+                </div>
+              </section>
+            )}
+          </div>
         ) : (
           <EmptyState title={`No results for "${query}"`} subtitle="Try a different search term." />
         )}

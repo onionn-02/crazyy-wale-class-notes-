@@ -1,5 +1,5 @@
 import { Component, type ErrorInfo, type ReactNode } from 'react'
-import { AlertTriangle } from 'lucide-react'
+import { AlertTriangle, ArrowRight } from 'lucide-react'
 
 interface Props {
   children: ReactNode
@@ -23,21 +23,20 @@ export default class ErrorBoundary extends Component<Props, State> {
   render() {
     if (this.state.hasError) {
       return (
-        <div className="mx-auto flex max-w-xl flex-col items-center px-4 py-24 text-center">
-          <span className="mb-6 flex h-16 w-16 items-center justify-center rounded-full bg-amber-50 text-amber-600 dark:bg-amber-500/10 dark:text-amber-400">
-            <AlertTriangle className="h-8 w-8" aria-hidden="true" />
-          </span>
-          <h1 className="text-2xl font-extrabold tracking-tight text-slate-900 dark:text-slate-50">
+        <div className="mx-auto flex max-w-xl flex-col items-center px-4 py-28 text-center sm:px-6">
+          <AlertTriangle className="mb-6 h-7 w-7 text-amber-500" aria-hidden="true" />
+          <h1 className="font-display text-3xl font-semibold tracking-tight text-ink sm:text-4xl">
             Something went wrong.
           </h1>
-          <p className="mt-2 text-slate-500 dark:text-slate-400">
+          <p className="mt-3 text-ink-muted">
             Sorry, this resource is currently unavailable. Please try again or go back home.
           </p>
           <a
             href="/"
-            className="mt-8 inline-flex items-center justify-center rounded-xl bg-brand-600 px-5 py-3 text-sm font-semibold text-white transition-colors hover:bg-brand-700"
+            className="mt-10 inline-flex items-center gap-2 rounded-md border border-edge-strong px-6 py-3 text-xs font-semibold uppercase tracking-widest text-ink transition-colors hover:border-brand-400/60 hover:text-brand-400"
           >
             Back to Study Hub
+            <ArrowRight className="h-3.5 w-3.5" aria-hidden="true" />
           </a>
         </div>
       )

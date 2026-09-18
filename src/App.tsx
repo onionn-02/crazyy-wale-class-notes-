@@ -2,6 +2,7 @@ import { Route, Routes } from 'react-router-dom'
 import Navbar from './components/Navbar'
 import Footer from './components/Footer'
 import ErrorBoundary from './components/ErrorBoundary'
+import BackgroundEffect from './components/BackgroundEffect'
 import Home from './pages/Home'
 import SubjectsPage from './pages/SubjectsPage'
 import SubjectPage from './pages/SubjectPage'
@@ -11,7 +12,8 @@ import NotFoundPage from './pages/NotFoundPage'
 
 export default function App() {
   return (
-    <div className="flex min-h-screen flex-col bg-slate-50 dark:bg-slate-950">
+    <div className="relative flex min-h-screen flex-col">
+      <BackgroundEffect />
       <Navbar />
       <main className="flex-1">
         <ErrorBoundary>
