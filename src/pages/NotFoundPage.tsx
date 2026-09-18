@@ -13,7 +13,7 @@ export default function NotFoundPage() {
         to="/"
         className="mt-10 inline-flex items-center gap-2 rounded-md border border-edge-strong px-6 py-3 text-xs font-semibold uppercase tracking-widest text-ink transition-colors hover:border-brand-400/60 hover:text-brand-400"
       >
-        Back to Study Hub
+        Back to Topper Tapri
         <ArrowRight className="h-3.5 w-3.5" aria-hidden="true" />
       </Link>
     </div>

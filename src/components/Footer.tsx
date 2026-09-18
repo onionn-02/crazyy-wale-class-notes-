@@ -17,7 +17,7 @@ export default function Footer() {
               <span className="flex h-8 w-8 items-center justify-center rounded-md border border-edge-strong text-brand-400">
                 <Logomark className="h-4 w-4" />
               </span>
-              <span className="font-display text-sm font-semibold uppercase tracking-[0.18em] text-ink">Study Hub</span>
+              <span className="font-display text-sm font-semibold uppercase tracking-[0.18em] text-ink">Topper Tapri</span>
             </div>
             <p className="mt-4 text-sm leading-relaxed text-ink-muted">
               Notes, PYQs and academic resources, all in one place.

@@ -1,16 +1,21 @@
 import {
   BookOpen,
   Building2,
+  Calendar,
+  CalendarDays,
   Code2,
   Cpu,
   FileQuestion,
   FileText,
   Folder,
+  Layers,
+  Megaphone,
   NotebookPen,
   Play,
   Ruler,
   Sigma,
   Star,
+  Wrench,
   Zap,
   ExternalLink,
   File,
@@ -28,6 +33,7 @@ const subjectIconMap: Record<string, LucideIcon> = {
   building: Building2,
   code: Code2,
   cpu: Cpu,
+  wrench: Wrench,
 }
 
 const categoryIconMap: Record<string, LucideIcon> = {
@@ -37,6 +43,10 @@ const categoryIconMap: Record<string, LucideIcon> = {
   star: Star,
   assignment: FileText,
   other: Folder,
+  calendar: Calendar,
+  holiday: CalendarDays,
+  megaphone: Megaphone,
+  flashcards: Layers,
 }
 
 const resourceTypeIconMap: Record<ResourceFileType, LucideIcon> = {

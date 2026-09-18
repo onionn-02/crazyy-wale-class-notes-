@@ -22,9 +22,4 @@ export const importantLinks: ImportantLink[] = [
     title: 'Internal Assessment Information',
     url: 'https://drive.google.com/file/d/1InternalAssessment/view',
   },
-  {
-    id: 'assignment-deadlines',
-    title: 'Assignment Deadlines',
-    url: 'https://drive.google.com/file/d/1AssignmentDeadlines/view',
-  },
 ]

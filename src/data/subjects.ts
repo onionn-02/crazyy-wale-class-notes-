@@ -33,7 +33,7 @@ export const subjects: Subject[] = [
     shortName: 'English',
     description: 'Communication skills & technical writing.',
     icon: 'book',
-    driveFolderUrl: '',
+    driveFolderUrl: 'https://drive.google.com/drive/folders/1qM51htdHjKnU9WUsptXkDkVI5frhnxXp',
     categories: defaultCategories,
   },
   {
@@ -49,10 +49,13 @@ export const subjects: Subject[] = [
     id: 'mcd',
     name: 'MCD',
     shortName: 'MCD',
-    description: 'Mechanics & Computer-aided Design.',
+    description: 'MCD',
     icon: 'ruler',
     driveFolderUrl: 'https://drive.google.com/drive/folders/1YuyAu8AR0HabHrhrdL5JrJ2jAF5KwOne',
-    categories: defaultCategories,
+    categories: [
+      ...defaultCategories,
+      { id: 'flashcards', name: 'Flash Cards', description: 'Formula sheets & quick-reference cheats', icon: 'flashcards' },
+    ],
   },
   {
     id: 'cte',
@@ -70,6 +73,28 @@ export const subjects: Subject[] = [
     description: 'Programming Languages & problem solving.',
     icon: 'code',
     driveFolderUrl: 'https://drive.google.com/drive/folders/1YRzhvS7LZ3ddcnQd2gptURKf1__zQMtk',
+    categories: defaultCategories,
+  },
+  {
+    id: 'academic-info',
+    name: 'Academic Info',
+    shortName: 'Academic',
+    description: 'Calendar, holidays & official notices.',
+    icon: 'building',
+    driveFolderUrl: 'https://drive.google.com/drive/folders/1WN_iLoTPlz9BtQ_7A1FFhhNh8IvWKz2I',
+    categories: [
+      { id: 'calendar', name: 'Academic Calendar', description: 'Semester & yearly calendar', icon: 'calendar' },
+      { id: 'holidays', name: 'Holidays', description: 'Holiday list', icon: 'holiday' },
+      { id: 'circulars', name: 'Circulars / Notices', description: 'Official notices & circulars', icon: 'megaphone' },
+    ],
+  },
+  {
+    id: 'cew',
+    name: 'CEW',
+    shortName: 'CEW',
+    description: 'CEW',
+    icon: 'wrench',
+    driveFolderUrl: 'https://drive.google.com/drive/folders/1dHg_-n4UAzcbe8_7PZ6vm_vuhfQFkRqg',
     categories: defaultCategories,
   },
 ]

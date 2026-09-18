@@ -24,7 +24,7 @@ export default function Navbar() {
           <span className="flex h-8 w-8 items-center justify-center rounded-md border border-edge-strong text-brand-400 transition-colors group-hover:border-brand-400/60">
             <Logomark className="h-4 w-4" />
           </span>
-          <span className="font-display text-sm font-semibold uppercase tracking-[0.18em] text-ink">Study Hub</span>
+          <span className="font-display text-sm font-semibold uppercase tracking-[0.18em] text-ink">Topper Tapri</span>
         </Link>
 
         <div className="hidden items-center gap-8 sm:flex">

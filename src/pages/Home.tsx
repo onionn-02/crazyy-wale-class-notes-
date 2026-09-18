@@ -48,7 +48,7 @@ export default function Home() {
         <div className="max-w-3xl">
           <p className="animate-fade-up flex items-center gap-2.5 text-xs font-semibold uppercase tracking-widest text-ink-muted">
             <span className="h-px w-5 bg-edge-strong" aria-hidden="true" />
-            Division Study Hub
+            Topper Tapri
           </p>
 
           <h1 className="mt-6 font-display text-[clamp(2.75rem,8.5vw,6rem)] font-semibold leading-[0.98] tracking-tightest text-ink">
