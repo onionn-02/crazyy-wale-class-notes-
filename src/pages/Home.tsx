@@ -6,8 +6,7 @@ import SubjectCard from '../components/SubjectCard'
 import SectionLabel from '../components/SectionLabel'
 import EmptyState from '../components/EmptyState'
 import { subjects, getSubjectById, getCategoryById } from '../data/subjects'
-import { getRecentResources, getImportantResources } from '../data/resources'
-import { importantLinks } from '../data/importantLinks'
+import { getRecentResources } from '../data/resources'
 import { formatDate } from '../utils/formatDate'
 import { ResourceTypeIcon } from '../components/icons'
 
@@ -18,19 +17,6 @@ export default function Home() {
   const [query, setQuery] = useState('')
   const navigate = useNavigate()
   const recentResources = getRecentResources(5)
-
-  // Normalize the two "important" sources (static division-wide links and
-  // resources flagged `important: true`) into one shape so they render as
-  // a single, consistently-styled list instead of two near-duplicate blocks.
-  const importantItems = [
-    ...importantLinks.map((link) => ({ id: link.id, title: link.title, meta: undefined as string | undefined, url: link.url })),
-    ...getImportantResources().map((resource) => ({
-      id: resource.id,
-      title: resource.title,
-      meta: getSubjectById(resource.subjectId)?.name,
-      url: resource.url,
-    })),
-  ]
 
   function handleSubmit(event: FormEvent) {
     event.preventDefault()
@@ -109,70 +95,42 @@ export default function Home() {
       </section>
 
       {/* ---------------------------------------------------------------- */}
-      {/* Recently added / Important                                       */}
+      {/* Recently added                                                    */}
       {/* ---------------------------------------------------------------- */}
-      <div className="mt-28 grid grid-cols-1 gap-16 sm:mt-36 lg:grid-cols-2 lg:gap-20">
-        <section>
-          <SectionLabel>Recently added</SectionLabel>
-          <h2 className="mt-4 font-display text-2xl font-semibold tracking-tight text-ink">Fresh off the drive</h2>
+      <section className="mt-28 sm:mt-36">
+        <SectionLabel>Recently added</SectionLabel>
+        <h2 className="mt-4 font-display text-2xl font-semibold tracking-tight text-ink">Fresh off the drive</h2>
 
-          {recentResources.length > 0 ? (
-            <div className="mt-6 divide-y divide-edge border-y border-edge">
-              {recentResources.map((resource) => {
-                const subject = getSubjectById(resource.subjectId)
-                const category = subject ? getCategoryById(subject, resource.categoryId) : undefined
-                return (
-                  <a key={resource.id} href={resource.url} target="_blank" rel="noopener noreferrer" className={rowLinkClass}>
-                    <div className="flex min-w-0 items-center gap-3">
-                      <ResourceTypeIcon type={resource.type} className="h-4 w-4 shrink-0 text-ink-faint" />
-                      <div className="min-w-0">
-                        <p className="truncate text-sm font-medium text-ink">{resource.title}</p>
-                        <p className="mt-0.5 truncate text-xs text-ink-muted">
-                          {subject?.name} · {category?.name} · {formatDate(resource.date)}
-                        </p>
-                      </div>
+        {recentResources.length > 0 ? (
+          <div className="mt-6 divide-y divide-edge border-y border-edge">
+            {recentResources.map((resource) => {
+              const subject = getSubjectById(resource.subjectId)
+              const category = subject ? getCategoryById(subject, resource.categoryId) : undefined
+              return (
+                <a key={resource.id} href={resource.url} target="_blank" rel="noopener noreferrer" className={rowLinkClass}>
+                  <div className="flex min-w-0 items-center gap-3">
+                    <ResourceTypeIcon type={resource.type} className="h-4 w-4 shrink-0 text-ink-faint" />
+                    <div className="min-w-0">
+                      <p className="truncate text-sm font-medium text-ink">{resource.title}</p>
+                      <p className="mt-0.5 truncate text-xs text-ink-muted">
+                        {subject?.name} · {category?.name} · {formatDate(resource.date)}
+                      </p>
                     </div>
-                    <ArrowRight
-                      className="h-3.5 w-3.5 shrink-0 text-ink-faint transition-transform group-hover:translate-x-1 group-hover:text-ink"
-                      aria-hidden="true"
-                    />
-                  </a>
-                )
-              })}
-            </div>
-          ) : (
-            <div className="mt-6">
-              <EmptyState title="Nothing added yet." subtitle="Check back soon." />
-            </div>
-          )}
-        </section>
-
-        <section>
-          <SectionLabel>Important</SectionLabel>
-          <h2 className="mt-4 font-display text-2xl font-semibold tracking-tight text-ink">Don't miss these</h2>
-
-          {importantItems.length > 0 ? (
-            <div className="mt-6 divide-y divide-edge border-y border-edge">
-              {importantItems.map((item) => (
-                <a key={item.id} href={item.url} target="_blank" rel="noopener noreferrer" className={rowLinkClass}>
-                  <div className="min-w-0">
-                    <p className="truncate text-sm font-medium text-ink">{item.title}</p>
-                    {item.meta && <p className="mt-0.5 truncate text-xs text-ink-muted">{item.meta}</p>}
                   </div>
                   <ArrowRight
                     className="h-3.5 w-3.5 shrink-0 text-ink-faint transition-transform group-hover:translate-x-1 group-hover:text-ink"
                     aria-hidden="true"
                   />
                 </a>
-              ))}
-            </div>
-          ) : (
-            <div className="mt-6">
-              <EmptyState title="Nothing pinned yet." subtitle="Check back soon." />
-            </div>
-          )}
-        </section>
-      </div>
+              )
+            })}
+          </div>
+        ) : (
+          <div className="mt-6">
+            <EmptyState title="Nothing added yet." subtitle="Check back soon." />
+          </div>
+        )}
+      </section>
 
       <div className="h-28 sm:h-36" aria-hidden="true" />
     </div>
